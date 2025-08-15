@@ -1,19 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0365b2c5ddbr"]
+[gd_scene load_steps=11 format=3 uid="uid://d0365b2c5ddbr"]
 
 [ext_resource type="Material" uid="uid://clj75rsdk8jp6" path="res://materials/dev/dev_floor.tres" id="1_t21ke"]
 [ext_resource type="PackedScene" uid="uid://gad1ui4n74d6" path="res://map elements/stairs.tscn" id="2_fy36t"]
 [ext_resource type="Material" uid="uid://c7ptixwyqmqe0" path="res://materials/dev/dev_wall.tres" id="2_i4kf4"]
-[ext_resource type="PackedScene" uid="uid://be153vhqcmtrt" path="res://models/Box.fbx" id="4_njhy2"]
+[ext_resource type="PackedScene" uid="uid://o57giw7qo4la" path="res://models/Item.glb" id="4_m6f6w"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="6_302sc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_302sc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_aunfx"]
+sky_material = SubResource("ProceduralSkyMaterial_302sc")
+
+[sub_resource type="Environment" id="Environment_j32wv"]
+background_mode = 2
+sky = SubResource("Sky_aunfx")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_i4kf4"]
 closed = true
 _data = {
-"points": PackedVector3Array(-3.4458, 0, 0.681147, 3.4458, 0, -0.681147, -10.2874, 0, -11.3885, -3.2054, 0, -0.160269, 3.2054, 0, 0.160269, -2.27391, 0, -9.10467, -1.4, 0, -0.25, 1.4, 0, 0.25, 6.42074, 0, -11.6289, -1.08182, 0, -4.32729, 1.08182, 0, 4.32729, 11.5894, 0, -6.38008, -0.240406, 0, -4.84817, 0.240406, 0, 4.84817, 11.1487, 0, 3.07585, 1, 0, -1.4, -1, 0, 1.4, 14.0336, 0, 9.92739, 4.44749, 0, -0.48081, -4.44749, 0, 0.48081, 3.89649, 0, 10.6887, 3.24547, 0, 0.641081, -3.24547, 0, -0.641081, -3.07526, 0, 12.8523, 1.68283, 0, 1.20202, -1.68283, 0, -1.20202, -8.84498, 0, 12.8122, 0.807658, 0, 1.96408, -0.807658, 0, -1.96408, -10.2473, 0, 7.88395, 1.52256, 0, 3.00506, -1.52256, 0, -3.00506, -13.6531, 0, 2.5149, -2.00337, 0, 3.0852, 2.00337, 0, -3.0852, -12.0103, 0, -5.61879),
+"points": PackedVector3Array(-1.4, 0, 0.6, 1.4, 0, -0.6, -9.3, 0, -8.8, -3, 0, 0.7, 3, 0, -0.7, -2.2, 0, -8.8, -3.7, 0, 0.5, 3.7, 0, -0.5, 3.8, 0, -11.3, -1.08182, 0, -4.32729, 1.08182, 0, 4.32729, 11.5894, 0, -6.38008, 0, 0, -3.8, 0, 0, 3.8, 10, 0, 2.5, 1, 0, -1.4, -1, 0, 1.4, 11.5, 0, 10.2, 5.8, 0, -0.2, -5.8, 0, 0.2, 4.8, 0, 10.8, 2.9, 0, -0.5, -2.9, 0, 0.5, -2.2, 0, 13.1, 1.68283, 0, 1.20202, -1.68283, 0, -1.20202, -9.2, 0, 12.7, 0.8, 0, 2.8, -0.8, 0, -2.8, -10.1, 0, 7.6, 1.52256, 0, 3.00506, -1.52256, 0, -3.00506, -13.6531, 0, 2.5149, -1.1, 0, 2, 1.1, 0, -2, -12.8, 0, -5.7),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 12
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_aunfx"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j32wv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, -12)
@@ -34,42 +58,41 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.5,
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.5, 1, -26.5)
 
 [node name="wallEast" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, 0.5, -12.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, 1.5, -12.25)
 material_override = ExtResource("2_i4kf4")
 use_collision = true
-size = Vector3(0.5, 1, 55.5)
+size = Vector3(0.5, 3, 55.5)
 
 [node name="wallWest" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.75, 0.5, -12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.75, 1.5, -12)
 material_override = ExtResource("2_i4kf4")
 use_collision = true
-size = Vector3(0.5, 1, 55)
+size = Vector3(0.5, 3, 55)
 
 [node name="wallNorth" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.5, -39.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -39.75)
 material_override = ExtResource("2_i4kf4")
 use_collision = true
-size = Vector3(56, 1, 0.5)
+size = Vector3(56, 3, 0.5)
 
 [node name="wallSouth" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.5, 15.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 15.75)
 material_override = ExtResource("2_i4kf4")
 use_collision = true
-size = Vector3(56, 1, 0.5)
+size = Vector3(56, 3, 0.5)
 
 [node name="Path3D" type="Path3D" parent="."]
-visible = false
 curve = SubResource("Curve3D_i4kf4")
 
 [node name="PathShape" type="CSGPolygon3D" parent="."]
 material_override = ExtResource("2_i4kf4")
 use_collision = true
-polygon = PackedVector2Array(0, 0, 0, 1, 0.1, 1, 0.1, 0)
+polygon = PackedVector2Array(0, 0, 0, 2, 0.1, 2, 0.1, 0)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 0
 path_interval = 1.0
-path_simplify_angle = 0.0
+path_simplify_angle = 10.0
 path_rotation = 2
 path_rotation_accurate = false
 path_local = false
@@ -80,12 +103,26 @@ path_joined = false
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -26)
 material_override = ExtResource("2_i4kf4")
+use_collision = true
 size = Vector3(2, 1, 2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.5, -26)
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1, 0)
 material_override = ExtResource("2_i4kf4")
 size = Vector3(3, 1, 2)
 
-[node name="Box" parent="." instance=ExtResource("4_njhy2")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -12.5, 0.5, -21)
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(480, 270)
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewport"]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -19.8, 1.55, -21.75)
+texture = SubResource("ViewportTexture_aunfx")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(0.707107, 0.353553, -0.612373, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, -16.0058, 3.25, -23.9439)
+
+[node name="Item" parent="." instance=ExtResource("4_m6f6w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11, 0.5, -16.5)
+
+[node name="ProtoController" parent="." instance=ExtResource("6_302sc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -19.5)
