@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0365b2c5ddbr"]
+[gd_scene load_steps=12 format=3 uid="uid://d0365b2c5ddbr"]
 
 [ext_resource type="Material" uid="uid://clj75rsdk8jp6" path="res://materials/dev/dev_floor.tres" id="1_t21ke"]
 [ext_resource type="PackedScene" uid="uid://gad1ui4n74d6" path="res://map elements/stairs.tscn" id="2_fy36t"]
 [ext_resource type="Material" uid="uid://c7ptixwyqmqe0" path="res://materials/dev/dev_wall.tres" id="2_i4kf4"]
 [ext_resource type="PackedScene" uid="uid://o57giw7qo4la" path="res://models/Item.glb" id="4_m6f6w"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="6_302sc"]
+[ext_resource type="PackedScene" uid="uid://cj4hq3prp7e6b" path="res://models/binbag.glb" id="6_aunfx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_302sc"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -126,3 +127,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11, 0
 
 [node name="ProtoController" parent="." instance=ExtResource("6_302sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -19.5)
+
+[node name="binbag" parent="." instance=ExtResource("6_aunfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16.3)
